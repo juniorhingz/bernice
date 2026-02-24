@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Bernice Kageha 💋❤️</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  top: 22%;
+}
+
+h1 {
+  font-size: 55px;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px pink; }
+  to { text-shadow: 0 0 30px red, 0 0 50px hotpink; }
+}
+
+.heartbeat {
+  font-size: 80px;
+  animation: beat 1s infinite;
+}
+
+@keyframes beat {
+  0%,100% {transform: scale(1);}
+  50% {transform: scale(1.3);}
+}
+
+.message {
+  font-size: 22px;
+  margin-top: 20px;
+}
+
+button {
+  margin: 15px;
+  padding: 15px 30px;
+  font-size: 20px;
+  border: none;
+  border-radius: 30px;
+  background: hotpink;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+}
+
+button:hover {
+  background: red;
+  transform: scale(1.1);
+}
+
+#choiceButtons {
+  display: none;
+}
+
+#finalMessage {
+  display: none;
+  font-size: 28px;
+  margin-top: 20px;
+  color: pink;
+}
+
+/* Floating Kiss Emojis */
+.kiss {
+  position: absolute;
+  font-size: 25px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<canvas id="fireworks"></canvas>
+
+<div class="container">
+  <h1>Bernice Kageha 💕💋</h1>
+  <div class="heartbeat">❤️</div>
+
+  <div class="message">
+    My beautiful Bernice 😘💋<br><br>
+    You are my happiness, my peace, my forever 💖✨
+  </div>
+
+  <button onclick="showChoices()">Will You Be Mine Forever? 💍💋</button>
+
+  <div id="choiceButtons">
+    <button onclick="sayYes()">YES 💖</button>
+    <button id="noBtn" onmouseover="moveNo()">NO 🙈</button>
+  </div>
+
+  <div id="finalMessage">
+    I will also be yours forever 💍💖😘💋
+  </div>
+</div>
+
+<script>
+// Fireworks
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function firework() {
+  const x = Math.random() * canvas.width;
+  const y = Math.random() * canvas.height / 2;
+
+  for (let i = 0; i < 60; i++) {
+    const angle = Math.random() * 2 * Math.PI;
+    const radius = Math.random() * 100;
+    ctx.beginPath();
+    ctx.arc(
+      x + Math.cos(angle)*radius,
+      y + Math.sin(angle)*radius,
+      2,
+      0,
+      Math.PI*2
+    );
+    ctx.fillStyle = "hsl(" + Math.random()*360 + ",100%,50%)";
+    ctx.fill();
+  }
+}
+
+setInterval(() => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  firework();
+}, 800);
+
+// Show YES/NO buttons
+function showChoices() {
+  document.getElementById("choiceButtons").style.display = "block";
+}
+
+// YES clicked
+function sayYes() {
+  document.getElementById("finalMessage").style.display = "block";
+}
+
+// NO button runs away
+function moveNo() {
+  const btn = document.getElementById("noBtn");
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * window.innerWidth + "px";
+  btn.style.top = Math.random() * window.innerHeight + "px";
+}
+
+// Floating Kiss Emojis
+function createKiss() {
+  const kiss = document.createElement("div");
+  kiss.classList.add("kiss");
+  kiss.innerHTML = "💋";
+  kiss.style.left = Math.random() * 100 + "vw";
+  kiss.style.fontSize = Math.random() * 20 + 20 + "px";
+  kiss.style.animationDuration = Math.random() * 3 + 4 + "s";
+  document.body.appendChild(kiss);
+
+  setTimeout(() => {
+    kiss.remove();
+  }, 6000);
+}
+
+setInterval(createKiss, 500);
+</script>
+
+</body>
+</html>
